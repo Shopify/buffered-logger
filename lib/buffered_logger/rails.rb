@@ -4,8 +4,6 @@ require "rails"
 class BufferedLogger
   class Railtie < Rails::Railtie
     initializer :buffered_logger, :before => :initialize_logger do |app|
-      next if app.config.logger
-
       log_dev = nil
       if ENV['RAILS_LOG_TO_STDOUT'].present?
         log_dev = STDOUT
