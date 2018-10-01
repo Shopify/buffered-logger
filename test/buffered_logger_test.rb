@@ -27,5 +27,13 @@ describe BufferedLogger do
 
       assert_equal "foo\n", @buffer.string
     end
+
+    it 'silence the logs' do
+      @logger.silence(::Logger::ERROR) do
+        @logger.info('foo')
+      end
+
+      assert_empty @buffer.string
+    end
   end
 end

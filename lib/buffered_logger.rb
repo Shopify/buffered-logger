@@ -2,7 +2,7 @@
 
 require 'logger'
 
-class BufferedLogger < ::Logger
+class BufferedLogger < defined?(::ActiveSupport::Logger) ? ::ActiveSupport::Logger : ::Logger
   require "buffered_logger/errors"
   require "buffered_logger/log_device_proxy"
   require "buffered_logger/middleware"
