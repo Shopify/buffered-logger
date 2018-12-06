@@ -81,4 +81,18 @@ describe BufferedLogger::LogDeviceProxy do
     @proxy.write("bbb")
     assert_equal "bbb", @proxy.current_log
   end
+
+  it "allows running procs that log" do
+    BufferedLogger.configure do |config|
+      config.flush_at_byte_size = 10
+      config.before_flush = proc { @proxy.write("Flushing logs") }
+      config.after_flush = proc { @proxy.write("Flushed logs") }
+    end
+    @proxy.start
+    @logdev.expects(:write).with("aaaaaaaaaaaaaaaFlushing logs")
+    @proxy.write("aaaaaaaaaaaaaaa")
+
+    @proxy.write("bbb")
+    assert_equal "Flushed logsbbb", @proxy.current_log
+  end
 end
