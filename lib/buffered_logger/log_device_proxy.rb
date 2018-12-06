@@ -32,11 +32,18 @@ class BufferedLogger
     end
 
     def write(message)
-      if started?
-        string_io.write(message)
-      else
+      unless started?
         @logdev.write(message)
+        return
       end
+
+      if flush_required?
+        BufferedLogger.configuration.before_flush.call if BufferedLogger.configuration.before_flush
+        self.end
+        start
+        BufferedLogger.configuration.after_flush.call if BufferedLogger.configuration.after_flush
+      end
+      string_io.write(message)
     end
 
     def current_log
@@ -44,6 +51,7 @@ class BufferedLogger
     end
 
     private
+
     def string_io
       Thread.current.thread_variable_get(THREAD_LOCAL_VAR_NAME)
     end
@@ -54,6 +62,13 @@ class BufferedLogger
 
     def destroy_thread_local
       self.string_io = nil
+    end
+
+    def flush_required?
+      return false unless (target_bytes = BufferedLogger.configuration.flush_at_byte_size)
+      return false unless string_io.string.length >= target_bytes
+
+      true
     end
   end
 end
