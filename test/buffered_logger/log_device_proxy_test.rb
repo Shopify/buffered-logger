@@ -2,6 +2,7 @@ require "test_helper"
 
 describe BufferedLogger::LogDeviceProxy do
   before do
+    BufferedLogger.reset_configuration!
     @logdev = mock()
     @proxy = BufferedLogger::LogDeviceProxy.new(@logdev)
   end
@@ -57,5 +58,41 @@ describe BufferedLogger::LogDeviceProxy do
     @proxy.write("1")
     @proxy.write("2")
     assert_equal "12", @proxy.current_log
+  end
+
+  it "does not clear the buffer if the byte size is not hit" do
+    BufferedLogger.configure do |config|
+      config.flush_at_byte_size = 10
+    end
+    @proxy.start
+    @proxy.write("aaaaa")
+    @proxy.write("bbb")
+    assert_equal "aaaaabbb", @proxy.current_log
+  end
+
+  it "clears the buffer if the byte size is hit" do
+    BufferedLogger.configure do |config|
+      config.flush_at_byte_size = 10
+    end
+    @proxy.start
+    @logdev.expects(:write).with("aaaaaaaaaaaaaaa")
+    @proxy.write("aaaaaaaaaaaaaaa")
+
+    @proxy.write("bbb")
+    assert_equal "bbb", @proxy.current_log
+  end
+
+  it "allows running procs that log" do
+    BufferedLogger.configure do |config|
+      config.flush_at_byte_size = 10
+      config.before_flush = proc { @proxy.write("Flushing logs") }
+      config.after_flush = proc { @proxy.write("Flushed logs") }
+    end
+    @proxy.start
+    @logdev.expects(:write).with("aaaaaaaaaaaaaaaFlushing logs")
+    @proxy.write("aaaaaaaaaaaaaaa")
+
+    @proxy.write("bbb")
+    assert_equal "Flushed logsbbb", @proxy.current_log
   end
 end
