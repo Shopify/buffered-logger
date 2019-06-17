@@ -1,0 +1,64 @@
+PATH
+  remote: .
+  specs:
+    buffered-logger (2.0.3)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (5.2.3)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 0.7, < 2)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    concurrent-ruby (1.1.5)
+    domain_name (0.5.20180417)
+      unf (>= 0.0.5, < 1.0.0)
+    highline (1.6.20)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
+    i18n (1.6.0)
+      concurrent-ruby (~> 1.0)
+    json_pure (1.8.1)
+    metaclass (0.0.4)
+    mime-types (3.2.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2019.0331)
+    minitest (5.11.3)
+    mocha (1.4.0)
+      metaclass (~> 0.0.1)
+    netrc (0.11.0)
+    package_cloud (0.3.05)
+      highline (= 1.6.20)
+      json_pure (= 1.8.1)
+      rainbow (= 2.2.2)
+      rest-client (~> 2.0)
+      thor (~> 0.18)
+    rainbow (2.2.2)
+      rake
+    rake (12.3.2)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
+    thor (0.20.3)
+    thread_safe (0.3.6)
+    tzinfo (1.2.5)
+      thread_safe (~> 0.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activesupport
+  buffered-logger!
+  minitest (~> 5.11.3)
+  mocha (~> 1.4.0)
+  package_cloud
+  rake
+
+BUNDLED WITH
+   1.17.3
