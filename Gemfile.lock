@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    buffered-logger (2.0.3)
+    buffered-logger (2.1.0)
 
 GEM
   remote: https://rubygems.org/
