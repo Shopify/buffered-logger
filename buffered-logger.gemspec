@@ -1,12 +1,18 @@
-require File.expand_path("../.gemspec", __FILE__)
 require File.expand_path("../lib/buffered_logger/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name        = "buffered-logger"
   gem.authors     = ["Samuel Kadolph"]
   gem.email       = ["samuel@kadolph.com"]
-  gem.description = readme.description
-  gem.summary     = readme.summary
+  gem.description = <<~EOM
+    buffered-logger is designed to be used in multithreaded or multifiber rack servers and includes a middleware to
+    automatically capture and write the buffered log statements during each request.
+    This is ideal for keeping requests together for log parsing software such as splunk
+  EOM
+  gem.summary     = <<~EOM
+    buffered-logger is a concurrency safe logger.
+    It buffers each logging statement and writes to the log file all at once.
+  EOM
   gem.homepage    = "http://samuelkadolph.github.com/buffered-logger/"
   gem.version     = BufferedLogger::VERSION
 
