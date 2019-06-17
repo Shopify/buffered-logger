@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/all' if ENV['AS_VERSION']
 
 require "minitest/autorun"

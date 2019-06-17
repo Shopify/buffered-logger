@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 describe BufferedLogger do
@@ -21,7 +23,7 @@ describe BufferedLogger do
       if defined?(ActiveSupport::Logger::SimpleFormatter)
         @logger.formatter = ActiveSupport::Logger::SimpleFormatter.new
       end
-      @logger.debug "foo"
+      @logger.debug("foo")
 
       assert_equal "foo\n", @buffer.string
     end

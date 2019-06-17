@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 describe "BufferedLogger slow tests" do
@@ -16,7 +18,7 @@ describe "BufferedLogger slow tests" do
           end
         end
       end
-      threads.each { |thr| thr.join }
+      threads.each(&:join)
       sleep(0.01 * rand)
     end
   end

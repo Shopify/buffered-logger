@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'logger'
 
 class BufferedLogger < ::Logger
@@ -21,7 +23,7 @@ class BufferedLogger < ::Logger
     @logdev.flush
   end
 
-  def start(&block)
+  def start
     raise AlreadyStartedError, "already started" if started?
     @logdev.start
 

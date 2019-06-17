@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 describe BufferedLogger::LogDeviceProxy do
   before do
-    @logdev = mock()
+    @logdev = mock
     @proxy = BufferedLogger::LogDeviceProxy.new(@logdev)
   end
 

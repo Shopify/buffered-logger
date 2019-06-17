@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path("../lib/buffered_logger/version", __FILE__)
 
 Gem::Specification.new do |gem|
@@ -9,7 +11,7 @@ Gem::Specification.new do |gem|
     automatically capture and write the buffered log statements during each request.
     This is ideal for keeping requests together for log parsing software such as splunk
   EOM
-  gem.summary     = <<~EOM
+  gem.summary = <<~EOM
     buffered-logger is a concurrency safe logger.
     It buffers each logging statement and writes to the log file all at once.
   EOM
@@ -21,7 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.4.0"
 
-  gem.add_development_dependency "mocha", "~> 1.4.0"
-  gem.add_development_dependency "rake", "~> 12.3.1"
-  gem.add_development_dependency "minitest", "~> 5.11.3"
+  gem.add_development_dependency("mocha", "~> 1.4.0")
+  gem.add_development_dependency("rake", "~> 12.3.1")
+  gem.add_development_dependency("minitest", "~> 5.11.3")
 end

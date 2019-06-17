@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "thread"
 
 class BufferedLogger
@@ -44,12 +46,13 @@ class BufferedLogger
     end
 
     private
+
     def string_io
       Thread.current.thread_variable_get(THREAD_LOCAL_VAR_NAME)
     end
 
     def string_io=(string_io)
-      Thread.current.thread_variable_set(THREAD_LOCAL_VAR_NAME,string_io)
+      Thread.current.thread_variable_set(THREAD_LOCAL_VAR_NAME, string_io)
     end
 
     def destroy_thread_local

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 describe "BufferedLogger::LogDeviceProxy slow tests" do
   before do
-    @logdev = mock()
+    @logdev = mock
     @proxy = BufferedLogger::LogDeviceProxy.new(@logdev)
   end
 
@@ -21,7 +23,7 @@ describe "BufferedLogger::LogDeviceProxy slow tests" do
             end
           end
         end
-        threads.each { |thr| thr.join }
+        threads.each(&:join)
       end
     end
   end
